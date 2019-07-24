@@ -104,36 +104,26 @@ export abstract class CRUD<T extends Typegoose> {
    * @returns DocumentQuery
    * @memberof MongoBase
    */
-  public update(
+  public updateOne(condition: any, document: any | T, options?: any, callback?: (err?: Error, data?: any) => void) {
+    if (options) {
+      return this.models.updateOne(condition, document, options, callback);
+    } else {
+      return this.models.updateOne(condition, document, callback);
+    }
+  }
+
+  public findOneAndUpdate(
     condition: any,
     document: any | T,
-    returnUpdatedDoc?: boolean,
     callback?: (err?: Error, data?: any) => void,
     options?: any
   ) {
-    let update;
-    if (options) update = this.models.updateOne(condition, document, options, callback);
-    else if (returnUpdatedDoc)
-      update = this.models.findOneAndUpdate(
-        condition,
-        document,
-        {
-          strict: false, // update field not defined in the schema
-          new: true
-        },
-        callback
-      );
-    else
-      update = this.models.updateOne(
-        condition,
-        document,
-        {
-          strict: false,
-          new: true
-        },
-        callback
-      );
-    return update;
+    if (condition && document && callback) {
+      console.log('here');
+      this.models.findOneAndUpdate(condition, document, callback);
+    } else if (options) {
+      this.models.findOneAndUpdate(condition, document, options, callback);
+    }
   }
 
   /**
@@ -141,7 +131,8 @@ export abstract class CRUD<T extends Typegoose> {
    * @param {string} fields
    * @param {object} [optionalQuery] - optional query for distict results
    * @returns {DocumentQuery<Document[], Document, {}>}
-   * @memberof MongoBase
+   * @memberof MongoBase  model.updateUser({ database: 'mongo-crud' }, { $set: { name: 'james may' } }, (er, d) => {
+
    */
   public distinct(field: string, optionalQuery?: object): DocumentQuery<Document[], Document> {
     let queryResults!: DocumentQuery<Document[], Document>;

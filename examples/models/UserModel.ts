@@ -10,4 +10,15 @@ export default class UserModel extends CRUD<null> {
   getStuff() {
     return this.find().exec();
   }
+
+  updateUser(condition, data, callback) {
+    return this.updateOne(
+      condition,
+      data,
+      {
+        strict: false //we want to ignore validation with the schema
+      },
+      callback
+    );
+  }
 }

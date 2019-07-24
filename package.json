@@ -1,0 +1,33 @@
+{
+    "name": "mongo-crud-repository",
+    "version": "1.0.0",
+    "description": "An Object data modeling tool build ontop of mongoose",
+    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon"
+    },
+    "keywords": [
+        "generics",
+        "mongo",
+        "repository",
+        "pattern",
+        "mongoose",
+        "typegoose",
+        "mongoDB"
+    ],
+    "author": "Myolisi",
+    "license": "MIT",
+    "dependencies": {
+        "express": "^4.17.1",
+        "mongoose": "^5.4.20",
+        "typegoose": "5.6.0"
+    },
+    "devDependencies": {
+        "@types/mongoose": "^5.5.0",
+        "eslint": "^4.15.0",
+        "nodemon": "^1.19.0",
+        "ts-node-dev": "^1.0.0-pre.32",
+        "tslib": "^1.9.3",
+        "typescript": "3.3.3"
+    }
+}
